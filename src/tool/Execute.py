@@ -3,8 +3,9 @@ from logging import getLogger
 logger = getLogger(__name__)
 
 class execute():
-    def __init__(self, file):
+    def __init__(self, file, first=0):
         self.file = file
+        self.first = first
 
     def execute(self, first, last):
         print(__name__)
@@ -21,3 +22,8 @@ class execute():
             logger.debug('b:{}'.format(result_b))
             logger.debug('c:{}'.format(result_c))
             return (result_b, result_c)
+
+    def get(self, size):
+        result = self.execute(self.first, size)
+        self.first += size
+        return result
