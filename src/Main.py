@@ -9,5 +9,5 @@ logger = getLogger(__name__)
 
 
 if __name__ == '__main__':
-    exe = Execute.execute('./data/test1.txt')
+    exe = Execute.execute('./data/test2.txt')
     exe.execute()
