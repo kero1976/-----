@@ -49,9 +49,23 @@ class analyze():
         result.append(self.format('分割区分', 1))
         result.append(self.format('レコード区分', 1))
         result.append(self.format('シーケンス番号', 5))
-        result.append(self.format('メッセージ長', 2))
-        result.append(self.format('データ', 12))
+        
+        datasize = self.get_message_length()
+        result.append(' サイズ:{}'.format(datasize))
+        result.append(self.format('データ', datasize))
+
+        result.append(self.format('次のデータ', 5))
         return result
+
+    def convert_byte2int(self, bytes):
+        return int.from_bytes(bytes, 'big')
+
+
+    def get_message_length(self):
+        bytes = self.exe.get(2)
+        data = self.convert_byte2int(bytes)
+        logger.debug('{} is {}'.format(bytes, data))
+        return data
 
     def format(self, name, size):
         """
