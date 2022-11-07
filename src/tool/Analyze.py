@@ -82,6 +82,7 @@ class analyze():
                         result.append(i)
                 
                 if next == 254:
+                    result.append(data)
                     break
 
             else:
