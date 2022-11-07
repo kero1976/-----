@@ -82,5 +82,5 @@ class analyze():
         len = self.exe.getint1()
         result.append('桁数:{}'.format(len))
         data = self.exe.get(len)
-        result.append('データ:{}({})'.format(data[0], data[1]))
+        result.append('データ:{}({})'.format(' '.join(data[0]), ''.join(data[1])))
         return result
