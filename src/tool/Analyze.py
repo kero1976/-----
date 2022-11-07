@@ -46,21 +46,21 @@ class analyze():
 
     def message_group(self):
         result = []
+        logger.info('メッセージヘッダ開始位置'.format(self.exe.first))
         result.append(self.format('分割区分', 1))
         result.append(self.format('レコード区分', 1))
         result.append(self.format('シーケンス番号', 5))
         
-        datasize = self.get_message_length()
+        datasize = self.exe.getint2()
         result.append(' サイズ:{}'.format(datasize))
-        result.append(self.format('データ', datasize))
-
-        result.append(self.format('次のデータ', 5))
+        
         return result
 
-    def get_message_length(self):
-        data = self.exe.getint()
-        return data
-
+    def get_tfd_manager(self):
+        data = self.et_tfd1()
+        for i in data:
+            print(i)
+        
     def format(self, name, size):
         """
         全角が含む場合でも桁そろえ
@@ -73,4 +73,14 @@ class analyze():
                 count += 1
         col = 20 - count
         result = '{:{width}s}:{}({})'.format(name, ' '.join(data[0]), ''.join(data[1]), width=col)
+        return result
+
+    def get_tfd1(self):
+        result = []
+        no = self.exe.getint1()
+        result.append('項目番号:{}'.format(no))
+        len = self.exe.getint1()
+        result.append('桁数:{}'.format(len))
+        data = self.exe.get(len)
+        result.append('データ:{}({})'.format(data[0], data[1]))
         return result
