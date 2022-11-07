@@ -28,11 +28,20 @@ class execute():
         self.first += size
         return result
 
-    def getint(self):
+    def getint2(self):
 
         with open(self.file, 'br') as f:
             f.seek(self.first)
             data = f.read(2)
 
         self.first += 2
+        return int.from_bytes(data, 'big')
+
+    def getint1(self):
+
+        with open(self.file, 'br') as f:
+            f.seek(self.first)
+            data = f.read(1)
+
+        self.first += 1
         return int.from_bytes(data, 'big')

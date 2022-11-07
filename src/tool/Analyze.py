@@ -57,16 +57,6 @@ class analyze():
         result.append(self.format('次のデータ', 5))
         return result
 
-    def convert_byte2int(self, bytedatas):
-        if type(bytedatas) == list:
-            if bytedatas[0] == b'\x00':
-                return int.from_bytes(bytedatas[1], 'big')
-            else:
-                raise Exception('データサイズが不正')
-        else:
-
-            return int.from_bytes(bytedatas, 'big')
-
     def get_message_length(self):
         data = self.exe.getint()
         return data
