@@ -29,7 +29,7 @@ class cii_message():
         buff = (self.exe.first % 251)
         buff_size = 251 - buff
         logger.info('空白サイズ:{}'.format(buff_size))
-        result.append(self.exe.get(buff_size))
+        result.append(self.FORMAT('空白',buff_size))
         return result
 
 
