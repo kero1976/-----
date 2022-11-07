@@ -40,11 +40,17 @@ class analyze():
         result.append(self.format('[第2]No.1', 5))
         result.append(self.format('[第2]No.2', 5))
         result.append(self.format('予約領域', 89))
+        result.append(self.format('改行？', 3))
+        logger.debug('■終了ポジション:{}'.format(self.exe.first))
         return result
 
     def message_group(self):
         result = []
-        result.append(self.format('head', 1))
+        result.append(self.format('分割区分', 1))
+        result.append(self.format('レコード区分', 1))
+        result.append(self.format('シーケンス番号', 5))
+        result.append(self.format('メッセージ長', 2))
+        result.append(self.format('データ', 12))
         return result
 
     def format(self, name, size):
