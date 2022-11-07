@@ -39,7 +39,12 @@ class analyze():
         result.append(self.format('非透過', 1))
         result.append(self.format('[第2]No.1', 5))
         result.append(self.format('[第2]No.2', 5))
+        result.append(self.format('予約領域', 89))
+        return result
 
+    def message_group(self):
+        result = []
+        result.append(self.format('head', 1))
         return result
 
     def format(self, name, size):
