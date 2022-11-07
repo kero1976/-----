@@ -66,14 +66,9 @@ class analyze():
         else:
 
             return int.from_bytes(bytedatas, 'big')
-            
-        
-
 
     def get_message_length(self):
-        bytes = self.exe.get(2)
-        data = self.convert_byte2int(bytes)
-        logger.debug('{} is {}'.format(bytes, data))
+        data = self.exe.getint()
         return data
 
     def format(self, name, size):

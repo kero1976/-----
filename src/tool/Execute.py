@@ -27,3 +27,12 @@ class execute():
         result = self.execute(self.first, size)
         self.first += size
         return result
+
+    def getint(self):
+
+        with open(self.file, 'br') as f:
+            f.seek(self.first)
+            data = f.read(2)
+
+        self.first += 2
+        return int.from_bytes(data, 'big')

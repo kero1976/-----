@@ -25,3 +25,8 @@ def test_get1():
     assert b == ['0x12']
     (b, c) = exe.get(1)
     assert b == ['0x34']
+
+def test_getint1():
+    exe = execute('./data/test2.txt')
+    data= exe.getint()
+    assert data == 4660
