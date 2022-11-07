@@ -1,37 +1,36 @@
 from logging import getLogger
-from tool.Execute import execute
-from tool.CiiHeader import cii_header
-from tool.CiiTrailer import cii_trailer
 import unicodedata
 
 logger = getLogger(__name__)
 
 
-class analyze():
-    def __init__(self, file):
-        self.file = file
-        self.exe = execute(file)
+class cii_header():
 
-    def head(self):
-        ciihead = cii_header(self.exe)
-        ciihead.print()
+    def __init__(self, exe):
+        self.exe = exe
+
+    def print(self):
+        datas = self.get()
+        for i in datas:
+            print(i)
+            
+    def get(self):
+        return self.control()
 
     def control(self):
 
+        result = []
         (data, size) = self.message_group()
         for i in data:
-            print(i)
+            result.append(i)
         tfd = self.get_tfd_manager()
         for i in tfd:
-            print(i)
+            result.append(i)
         buff = (self.exe.first % 251)
         buff_size = 251 - buff
         logger.info('空白サイズ:{}'.format(buff_size))
-        self.exe.get(buff_size)
-
-    def trailer(self):
-        ciitrail = cii_trailer(self.exe)
-        ciitrail.print()
+        result.append(self.exe.get(buff_size))
+        return result
 
 
     def message_group(self):

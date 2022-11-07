@@ -9,7 +9,12 @@ class cii_header():
     def __init__(self, exe):
         self.exe = exe
 
-    def head(self):
+    def print(self):
+        datas = self.get()
+        for i in datas:
+            print(i)
+            
+    def get(self):
         result = []
         result.append(self.format('分割区分', 1))
         result.append(self.format('レコード区分', 1))
