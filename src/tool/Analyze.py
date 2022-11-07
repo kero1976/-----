@@ -24,6 +24,21 @@ class analyze():
         result.append(self.format('[BPID]機関コード', 4))
         result.append(self.format('[BPID]サブ機関コード', 2))
         result.append(self.format('[BPID]バージョン', 2))
+        result.append(self.format('予約領域', 12))
+        result.append(self.format('情報区分', 4))
+        result.append(self.format('[第1]No.1', 3))
+        result.append(self.format('[第1]No.2', 3))
+        result.append(self.format('フォーマットID', 2))
+        result.append(self.format('予約領域', 10))
+        result.append(self.format('作成日時時刻', 12))
+        result.append(self.format('予約領域', 10))
+        result.append(self.format('シンタックスID', 6))
+        result.append(self.format('拡張モード', 1))
+        result.append(self.format('文字コード8', 1))
+        result.append(self.format('文字コード16', 1))
+        result.append(self.format('非透過', 1))
+        result.append(self.format('[第2]No.1', 5))
+        result.append(self.format('[第2]No.2', 5))
 
         return result
 
@@ -38,5 +53,5 @@ class analyze():
             if unicodedata.east_asian_width(c) in 'FWA':
                 count += 1
         col = 20 - count
-        result = '{:{width}s}:{}({})'.format(name, data[0], data[1], width=col)
+        result = '{:{width}s}:{}({})'.format(name, ' '.join(data[0]), ''.join(data[1]), width=col)
         return result
