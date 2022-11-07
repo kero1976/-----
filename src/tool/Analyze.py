@@ -83,7 +83,8 @@ class analyze():
         no = self.exe.getint1()
         len = self.exe.getint1()
         data = self.exe.get(len)
-        strdata = '項目番号:{},サイズ:{},データ:{}'.format(no, len, data)
+        datastr = '{}({})'.format(' '.join(data[0]), ''.join(data[1]))
+        strdata = '項目番号:{},サイズ:{},データ:{}'.format(no, len, datastr)
         next = self.exe.getint1()
         self.exe.first -= 1
 
