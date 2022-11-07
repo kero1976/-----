@@ -4,7 +4,7 @@ import unicodedata
 logger = getLogger(__name__)
 
 
-class cii_header():
+class cii_message():
 
     def __init__(self, exe):
         self.exe = exe
