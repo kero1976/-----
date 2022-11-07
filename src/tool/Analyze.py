@@ -57,7 +57,7 @@ class analyze():
         return result
 
     def get_tfd_manager(self):
-        data = self.et_tfd1()
+        data = self.get_tfd1()
         for i in data:
             print(i)
         
