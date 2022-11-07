@@ -44,6 +44,16 @@ class analyze():
         logger.debug('■終了ポジション:{}'.format(self.exe.first))
         return result
 
+    def control(self):
+        (data, size) = self.message_group()
+        for i in data:
+            print(i)
+        tfd = self.get_tfd_manager()
+        for i in tfd:
+            print(i)
+        buff = self.exe.first - size
+        logger.info('空白サイズ:{}'.format(buff))
+
     def message_group(self):
         result = []
         logger.info('メッセージヘッダ開始位置:{}'.format(self.exe.first))
@@ -54,22 +64,25 @@ class analyze():
         datasize = self.exe.getint2()
         result.append(' サイズ:{}'.format(datasize))
         
-        return result
+        return (result, datasize)
 
     def get_tfd_manager(self):
+        result = []
         while True:
             (data, no) = self.get_tfd1()
             if no >= 240:
                 next = self.exe.getint1()
                 if next == 250:
                     # マルチ明細(FA)
-                    (data, next) = self.get_tfd1_FA()
-                    print(data)
-                    print(next)
+                    data = self.get_tfd1_FA()
+                    for i in data:
+                        result.append(i)
+                
+                if next == 254:
                     break
 
             else:
-                print(data)
+                result.append(data)
         
     def format(self, name, size):
         """
