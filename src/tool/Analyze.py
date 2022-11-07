@@ -45,13 +45,16 @@ class analyze():
         return result
 
     def control(self):
+        firstposition = self.exe.first
         (data, size) = self.message_group()
         for i in data:
             print(i)
         tfd = self.get_tfd_manager()
         for i in tfd:
             print(i)
-        buff = self.exe.first - size
+        yotei_position = firstposition + size
+
+        buff = self.exe.first - yotei_position
         logger.info('空白サイズ:{}'.format(buff))
 
     def message_group(self):
@@ -83,6 +86,7 @@ class analyze():
 
             else:
                 result.append(data)
+        return result
         
     def format(self, name, size):
         """
