@@ -99,15 +99,17 @@ class analyze():
 
     def get_tfd1_FA(self):
 
+        result = []
         while True:
             no = self.exe.getint1()
             len = self.exe.getint1()
             data = self.exe.get(len)
             datastr = '{}({})'.format(' '.join(data[0]), ''.join(data[1]))
-            strdata = 'マルチ明細{}:サイズ:{},データ:{}'.format(no, len, datastr)
+            result.append('マルチ明細{}:サイズ:{},データ:{}'.format(no, len, datastr))
+
             next = self.exe.getint1()
             self.exe.first -= 1
             if next > 10:
                 break
 
-        return (strdata, next)
+        return (result, next)
