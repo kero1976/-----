@@ -45,17 +45,29 @@ class analyze():
         return result
 
     def control(self):
-        firstposition = self.exe.first
+
         (data, size) = self.message_group()
         for i in data:
             print(i)
         tfd = self.get_tfd_manager()
         for i in tfd:
             print(i)
-        yotei_position = firstposition + size
+        buff = (self.exe.first % 251)
+        buff_size = 251 - buff
+        logger.info('空白サイズ:{}'.format(buff_size))
+        self.exe.get(buff_size)
 
-        buff = self.exe.first - yotei_position
-        logger.info('空白サイズ:{}'.format(buff))
+    def trailer(self):
+        result = []
+        result.append(self.format('分割区分', 1))
+        result.append(self.format('レコード区分', 1))
+        result.append(self.format('最終シーケンス番号', 5))
+        result.append(self.format('項目No1合計', 15))
+        result.append(self.format('項目No2合計', 15))
+        result.append(self.format('予約領域', 214))
+
+        return result
+
 
     def message_group(self):
         result = []
