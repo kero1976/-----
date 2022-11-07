@@ -60,7 +60,14 @@ class analyze():
         while True:
             (data, no) = self.get_tfd1()
             if no >= 240:
-                break
+                next = self.exe.getint1()
+                if next == 240:
+                    # マルチ明細
+                    len = self.exe.getint1()
+                    multidata = self.exe.get(len)
+                    datastr = '{}({})'.format(' '.join(multidata[0]), ''.join(multidata[1]))
+                    print(datastr)
+
             else:
                 print(data)
         
