@@ -8,7 +8,6 @@ class execute():
         self.first = first
 
     def execute(self, first, last):
-        print(__name__)
         logger.debug(self.file)
         with open(self.file, 'br') as f:
             f.seek(first)
