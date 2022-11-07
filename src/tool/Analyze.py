@@ -109,7 +109,11 @@ class analyze():
 
             next = self.exe.getint1()
             self.exe.first -= 1
-            if next > 10:
+            if next > 240:
+                if next == 252:
+                    logger.debug('マルチ明細終了')
+                    # 1バイト進める
+                    self.exe.getint1()
                 break
 
-        return (result, next)
+        return result
