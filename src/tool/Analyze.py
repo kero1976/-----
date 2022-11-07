@@ -61,12 +61,12 @@ class analyze():
             (data, no) = self.get_tfd1()
             if no >= 240:
                 next = self.exe.getint1()
-                if next == 240:
-                    # マルチ明細
-                    len = self.exe.getint1()
-                    multidata = self.exe.get(len)
-                    datastr = '{}({})'.format(' '.join(multidata[0]), ''.join(multidata[1]))
-                    print(datastr)
+                if next == 250:
+                    # マルチ明細(FA)
+                    (data, next) = self.get_tfd1_FA()
+                    print(data)
+                    print(next)
+                    break
 
             else:
                 print(data)
@@ -92,6 +92,17 @@ class analyze():
         data = self.exe.get(len)
         datastr = '{}({})'.format(' '.join(data[0]), ''.join(data[1]))
         strdata = '項目番号:{},サイズ:{},データ:{}'.format(no, len, datastr)
+        next = self.exe.getint1()
+        self.exe.first -= 1
+
+        return (strdata, next)
+
+    def get_tfd1_FA(self):
+
+        len = self.exe.getint1()
+        data = self.exe.get(len)
+        datastr = '{}({})'.format(' '.join(data[0]), ''.join(data[1]))
+        strdata = 'マルチ明細:サイズ:{},データ:{}'.format(len, datastr)
         next = self.exe.getint1()
         self.exe.first -= 1
 
