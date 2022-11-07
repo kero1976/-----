@@ -57,9 +57,12 @@ class analyze():
         return result
 
     def get_tfd_manager(self):
-        data = self.get_tfd1()
-        for i in data:
-            print(i)
+        while True:
+            (data, no) = self.get_tfd1()
+            if no >= 240:
+                break
+            else:
+                print(data)
         
     def format(self, name, size):
         """
@@ -76,11 +79,12 @@ class analyze():
         return result
 
     def get_tfd1(self):
-        result = []
+
         no = self.exe.getint1()
-        result.append('項目番号:{}'.format(no))
         len = self.exe.getint1()
-        result.append('桁数:{}'.format(len))
         data = self.exe.get(len)
-        result.append('データ:{}({})'.format(' '.join(data[0]), ''.join(data[1])))
-        return result
+        strdata = '項目番号:{},サイズ:{},データ:{}'.format(no, len, data)
+        next = self.exe.getint1()
+        self.exe.first -= 1
+
+        return (strdata, next)
