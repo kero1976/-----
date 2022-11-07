@@ -46,7 +46,7 @@ class analyze():
 
     def message_group(self):
         result = []
-        logger.info('メッセージヘッダ開始位置'.format(self.exe.first))
+        logger.info('メッセージヘッダ開始位置:{}'.format(self.exe.first))
         result.append(self.format('分割区分', 1))
         result.append(self.format('レコード区分', 1))
         result.append(self.format('シーケンス番号', 5))
